@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes, ReactNode } from "react";
+import { forwardRef, HTMLAttributes } from "react";
 import clsx from "clsx";
 
 const CardContainer = forwardRef<
@@ -41,9 +41,7 @@ type CardComponent = typeof CardContainer & {
   Content: typeof CardContent;
 };
 
-const Card = CardContainer as CardComponent;
-
-Object.assign(Card, {
+const Card = Object.assign(CardContainer as CardComponent, {
   Header: CardHeader,
   Title: CardTitle,
   Description: CardDescription,
@@ -51,9 +49,9 @@ Object.assign(Card, {
   displayName: "Card",
 });
 
-Object.assign(Card.Header, { displayName: "CardHeader" });
-Object.assign(Card.Title, { displayName: "CardTitle" });
-Object.assign(Card.Description, { displayName: "CardDescription" });
-Object.assign(Card.Content, { displayName: "CardContent" });
+Card.Header.displayName = "CardHeader";
+Card.Title.displayName = "CardTitle";
+Card.Description.displayName = "CardDescription";
+Card.Content.displayName = "CardContent";
 
 export default Card;
