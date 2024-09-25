@@ -8,6 +8,8 @@ const CardContainer = forwardRef<
   <div ref={ref} className={clsx("border shadow-sm", className)} {...props} />
 ));
 
+CardContainer.displayName = "CardContainer";
+
 const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div ref={ref} className={clsx(className)} {...props} />
