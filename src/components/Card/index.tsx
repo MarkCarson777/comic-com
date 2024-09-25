@@ -51,6 +51,12 @@ type CardComponent = typeof CardContainer & {
   Content: typeof CardContent;
 };
 
-const Card = CardContainer as CardComponent;
+const Card = Object.assign(CardContainer as CardComponent, {
+  Header: CardHeader,
+  Title: CardTitle,
+  Description: CardDescription,
+  Content: CardContent,
+  displayName: "Card",
+});
 
 export default Card;
