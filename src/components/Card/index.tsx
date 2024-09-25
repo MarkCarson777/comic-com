@@ -16,12 +16,16 @@ const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ),
 );
 
+CardHeader.displayName = "CardHeader";
+
 const CardTitle = forwardRef<
   HTMLParagraphElement,
   HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
   <h3 ref={ref} className={clsx(className)} {...props} />
 ));
+
+CardTitle.displayName = "CardTitle";
 
 const CardDescription = forwardRef<
   HTMLParagraphElement,
@@ -30,11 +34,15 @@ const CardDescription = forwardRef<
   <p ref={ref} className={clsx(className)} {...props} />
 ));
 
+CardDescription.displayName = "CardDescription";
+
 const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div ref={ref} className={clsx(className)} {...props} />
   ),
 );
+
+CardContent.displayName = "CardContent";
 
 type CardComponent = typeof CardContainer & {
   Header: typeof CardHeader;
@@ -43,14 +51,6 @@ type CardComponent = typeof CardContainer & {
   Content: typeof CardContent;
 };
 
-const Card = Object.assign(CardContainer as CardComponent, {
-  Header: Object.assign(CardHeader, { displayName: "CardHeader" }),
-  Title: Object.assign(CardTitle, { displayName: "CardTitle" }),
-  Description: Object.assign(CardDescription, {
-    displayName: "CardDescription",
-  }),
-  Content: Object.assign(CardContent, { displayName: "CardContent" }),
-  displayName: "Card",
-});
+const Card = CardContainer as CardComponent;
 
 export default Card;
