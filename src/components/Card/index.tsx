@@ -42,16 +42,13 @@ type CardComponent = typeof CardContainer & {
 };
 
 const Card = Object.assign(CardContainer as CardComponent, {
-  Header: CardHeader,
-  Title: CardTitle,
-  Description: CardDescription,
-  Content: CardContent,
+  Header: Object.assign(CardHeader, { displayName: "CardHeader" }),
+  Title: Object.assign(CardTitle, { displayName: "CardTitle" }),
+  Description: Object.assign(CardDescription, {
+    displayName: "CardDescription",
+  }),
+  Content: Object.assign(CardContent, { displayName: "CardContent" }),
   displayName: "Card",
 });
-
-Card.Header.displayName = "CardHeader";
-Card.Title.displayName = "CardTitle";
-Card.Description.displayName = "CardDescription";
-Card.Content.displayName = "CardContent";
 
 export default Card;
