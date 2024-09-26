@@ -1,5 +1,5 @@
 import prisma from "@/db/db";
-import DashboardCard from "@/components/DashboardCard";
+import DashboardCard from "@/components/Card/DashboardCard";
 import { formatNumber, formatCurrency } from "@/utils/formatters";
 
 async function getSalesData() {
