@@ -8,9 +8,33 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
+      borderColor: {
+        input: "#000",
+      },
+      ringColor: {
+        ring: "#7cc0e7",
+      },
+      ringOffsetColor: {
         background: "var(--background)",
-        foreground: "var(--foreground)",
+      },
+      colors: {
+        primary: {
+          DEFAULT: "#457ee6",
+          foreground: "#FFF",
+        },
+        secondary: {
+          DEFAULT: "#696b69",
+          foreground: "#FFF",
+        },
+        destructive: {
+          DEFAULT: "#d9483a",
+          foreground: "#FFF",
+        },
+        accent: {
+          DEFAULT: "#7a7a7a",
+          foreground: "#FFF",
+        },
+        background: "var(--background)",
       },
     },
   },
