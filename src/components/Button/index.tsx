@@ -24,10 +24,10 @@ const buttonVariants = cva(
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
       },
-      defaultVariants: {
-        variant: "default",
-        size: "default",
-      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
     },
   },
 );
