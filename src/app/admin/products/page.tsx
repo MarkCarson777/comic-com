@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import Button from "@/components/Button";
-import PageHeader from "./_components/PageHeader";
+import { PageHeader } from "./_components/PageHeader";
 import {
   Table,
   TableHead,
