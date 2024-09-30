@@ -41,6 +41,10 @@ export function ProductForm() {
         <Label htmlFor="file">File</Label>
         <Input type="file" id="file" name="file" required />
       </div>
+      <div className="space-y-2">
+        <Label htmlFor="image">Image</Label>
+        <Input type="file" id="image" name="image" required />
+      </div>
       <Button type="submit">Save</Button>
     </form>
   );
