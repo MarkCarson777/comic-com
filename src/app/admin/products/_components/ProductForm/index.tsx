@@ -10,8 +10,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { formatCurrency } from "@/utils/formatters";
 import { addProduct } from "@/app/admin/_actions/products";
 
+import { useFormStatus } from "react-dom";
+
 export function ProductForm() {
-  const [priceInCents, setPriceInCents] = useState<number>();
+  const [priceInCents, setPriceInCents] = useState<number | undefined>();
 
   return (
     <form action={addProduct} className="space-y-8">
@@ -45,7 +47,17 @@ export function ProductForm() {
         <Label htmlFor="image">Image</Label>
         <Input type="file" id="image" name="image" required />
       </div>
-      <Button type="submit">Save</Button>
+      <SubmitButton />
     </form>
+  );
+}
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button type="submit" disabled={pending}>
+      {pending ? "Saving..." : "Save"}
+    </Button>
   );
 }
