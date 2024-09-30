@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 
 import prisma from "@/db/db";
+import { formatCurrency, formatNumber } from "@/utils/formatters";
 
 export default function AdminProductsPage() {
   return (
@@ -60,7 +61,24 @@ async function ProductsTable() {
         {products.map((product) => (
           <TableRow key={product.id}>
             <TableCell>
-              {product.isAvailableForPurchase ? <>✔️</> : <>❌</>}
+              {product.isAvailableForPurchase ? (
+                <>
+                  <span>✔️</span>
+                  <span className="sr-only">Available</span>
+                </>
+              ) : (
+                <>
+                  <span>❌</span>
+                  <span className="sr-only">Unvailable</span>
+                </>
+              )}
+            </TableCell>
+            <TableCell>{product.name}</TableCell>
+            <TableCell>{formatCurrency(product.priceInCents / 100)}</TableCell>
+            <TableCell>{formatNumber(product._count.orders)}</TableCell>
+            <TableCell>
+              <span>Actions</span>
+              <span className="sr-only">Actions</span>
             </TableCell>
           </TableRow>
         ))}
