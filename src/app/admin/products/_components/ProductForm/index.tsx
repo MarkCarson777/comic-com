@@ -5,15 +5,16 @@ import { useState } from "react";
 import Button from "@/components/Button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 import { formatCurrency } from "@/utils/formatters";
-import { Textarea } from "@/components/ui/textarea";
+import { addProduct } from "@/app/admin/_actions/products";
 
 export function ProductForm() {
   const [priceInCents, setPriceInCents] = useState<number>();
 
   return (
-    <form action className="space-y-8">
+    <form action={addProduct} className="space-y-8">
       <div className="space-y-2">
         <Label htmlFor="name">Name</Label>
         <Input type="text" id="name" name="name" required />
