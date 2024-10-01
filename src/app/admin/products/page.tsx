@@ -13,14 +13,12 @@ import {
 import {
   DropdownMenu,
   DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 
 import prisma from "@/db/db";
 import { formatCurrency, formatNumber } from "@/utils/formatters";
-import {
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@radix-ui/react-dropdown-menu";
 import {
   ActiveToggleToggleDropdownItem,
   DeleteDropdownItem,
