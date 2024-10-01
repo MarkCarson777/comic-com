@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
 import prisma from "@/db/db";
@@ -107,6 +108,7 @@ async function ProductsTable() {
                     id={product.id}
                     isAvailableForPurchase={product.isAvailableForPurchase}
                   />
+                  <DropdownMenuSeparator />
                   <DeleteDropdownItem
                     id={product.id}
                     disabled={product._count.orders > 0}
