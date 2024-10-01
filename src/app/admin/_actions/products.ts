@@ -3,7 +3,7 @@
 import prisma from "@/db/db";
 import { z } from "zod";
 import fs from "fs/promises";
-import { redirect } from "next/navigation";
+import { redirect, notFound } from "next/navigation";
 import { File } from "buffer";
 
 const fileSchema = z.instanceof(File, { message: "Required" });
@@ -64,5 +64,6 @@ export async function toggleProductAvailability(
 }
 
 export async function deleteProduct(id: string) {
-  await prisma.product.delete({ where: { id } });
+  const product = await prisma.product.delete({ where: { id } });
+  if (product == null) return notFound();
 }
