@@ -62,3 +62,7 @@ export async function toggleProductAvailability(
     data: { isAvailableForPurchase },
   });
 }
+
+export async function deleteProduct(id: string) {
+  await prisma.product.delete({ where: { id } });
+}
