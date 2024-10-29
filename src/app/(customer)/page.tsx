@@ -1,19 +1,57 @@
-import prisma from "@/db/db"
+import prisma from "@/db/db";
+import { Product } from "@prisma/client";
+import Link from "next/link";
+import Button from "@/components/Button";
+import { ArrowRight } from "lucide-react";
 
 function getMostPopularProducts() {
   return prisma.product.findMany({
     where: { isAvailableForPurchase: true },
-    orderBy: { orders: { _count: 'desc'} },
-    take: 6 })
+    orderBy: { orders: { _count: "desc" } },
+    take: 6,
+  });
 }
 
 function getNewestProducts() {
   return prisma.product.findMany({
     where: { isAvailableForPurchase: true },
-    orderBy: { createdAt: 'desc' },
-    take: 6 })
+    orderBy: { createdAt: "desc" },
+    take: 6,
+  });
 }
 
 export default function HomePage() {
-  return (<h1>Hi</h1>)
+  return (
+    <main className="space-y-12">
+      <ProductGridSection
+        title="Most Popular"
+        productsFetcher={getMostPopularProducts}
+      />
+      <ProductGridSection title="Newest" productsFetcher={getNewestProducts} />
+    </main>
+  );
+}
+
+type ProductGridSectionProps = {
+  title: string;
+  productsFetcher: () => Promise<Product[]>;
+};
+
+function ProductGridSection({
+  productsFetcher,
+  title,
+}: ProductGridSectionProps) {
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-4">
+        <h2 className="text-3xl font-bold">{title}</h2>
+        <Button variant="outline" asChild>
+          <Link href="/products" className="space-x-2">
+            <span>View All</span>
+            <ArrowRight className="size-4" />
+          </Link>
+        </Button>
+      </div>
+    </div>
+  );
 }
