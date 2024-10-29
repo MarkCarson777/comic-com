@@ -2,6 +2,7 @@ import prisma from "@/db/db";
 import { Product } from "@prisma/client";
 import Link from "next/link";
 import Button from "@/components/Button";
+import { ProductCard } from "@/components/Card/ProductCard";
 import { ArrowRight } from "lucide-react";
 
 function getMostPopularProducts() {
@@ -37,7 +38,7 @@ type ProductGridSectionProps = {
   productsFetcher: () => Promise<Product[]>;
 };
 
-function ProductGridSection({
+async function ProductGridSection({
   productsFetcher,
   title,
 }: ProductGridSectionProps) {
@@ -51,6 +52,11 @@ function ProductGridSection({
             <ArrowRight className="size-4" />
           </Link>
         </Button>
+      </div>
+      <div className="md:grid-cold-2 grid grid-cols-1 gap-4 lg:grid-cols-3">
+        {(await productsFetcher()).map((product) => {
+          return <ProductCard key={product.id} {...product} />;
+        })}
       </div>
     </div>
   );

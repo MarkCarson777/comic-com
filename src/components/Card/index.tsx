@@ -44,11 +44,24 @@ const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 
 CardContent.displayName = "CardContent";
 
+const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={clsx("flex items-center", className)}
+      {...props}
+    />
+  ),
+);
+
+CardContent.displayName = "CardFooter";
+
 type CardComponent = typeof CardContainer & {
   Header: typeof CardHeader;
   Title: typeof CardTitle;
   Description: typeof CardDescription;
   Content: typeof CardContent;
+  Footer: typeof CardFooter;
 };
 
 const Card = Object.assign(CardContainer as CardComponent, {
@@ -56,6 +69,7 @@ const Card = Object.assign(CardContainer as CardComponent, {
   Title: CardTitle,
   Description: CardDescription,
   Content: CardContent,
+  Footer: CardFooter,
   displayName: "Card",
 });
 
