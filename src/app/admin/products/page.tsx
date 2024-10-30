@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import prisma from "@/db/db";
-import { formatCurrency, formatNumber } from "@/utils/formatters";
+import { formatCurrency, formatNumber } from "@/lib/formatters";
 import {
   ActiveToggleToggleDropdownItem,
   DeleteDropdownItem,

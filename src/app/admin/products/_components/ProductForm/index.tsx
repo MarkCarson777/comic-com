@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-import { formatCurrency } from "@/utils/formatters";
+import { formatCurrency } from "@/lib/formatters";
 import { addProduct, updateProduct } from "@/app/admin/_actions/products";
 
 import { useFormStatus, useFormState } from "react-dom";

@@ -1,6 +1,6 @@
 import prisma from "@/db/db";
 import DashboardCard from "@/components/Card/DashboardCard";
-import { formatNumber, formatCurrency } from "@/utils/formatters";
+import { formatNumber, formatCurrency } from "@/lib/formatters";
 
 async function getSalesData() {
   const data = await prisma.order.aggregate({

@@ -1,5 +1,5 @@
 import Card from "@/components/Card";
-import { formatCurrency } from "@/utils/formatters";
+import { formatCurrency } from "@/lib/formatters";
 import Button from "@/components/Button";
 import Link from "next/link";
 import Image from "next/image";
