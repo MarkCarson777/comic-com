@@ -4,6 +4,7 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import { ProductCard } from "@/components/Card/ProductCard";
 import { ArrowRight } from "lucide-react";
+import { Suspense } from "react";
 
 function getMostPopularProducts() {
   return prisma.product.findMany({
@@ -54,10 +55,20 @@ async function ProductGridSection({
         </Button>
       </div>
       <div className="md:grid-cold-2 grid grid-cols-1 gap-4 lg:grid-cols-3">
-        {(await productsFetcher()).map((product) => {
-          return <ProductCard key={product.id} {...product} />;
-        })}
+        <Suspense>
+          <ProductSuspense productsFetcher={productsFetcher} />
+        </Suspense>
       </div>
     </div>
   );
+}
+
+async function ProductSuspense({
+  productsFetcher,
+}: {
+  productsFetcher: () => Promise<Product[]>;
+}) {
+  return (await productsFetcher()).map((product) => {
+    return <ProductCard key={product.id} {...product} />;
+  });
 }

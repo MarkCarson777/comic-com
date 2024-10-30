@@ -60,7 +60,7 @@ export function ProductCardSkeleton() {
         <div className="h-4 w-3/4 rounded-full bg-gray-300" />
       </Card.Content>
       <Card.Footer>
-        <Button disabled size="lg" className="w-full" />
+        <Button disabled size="lg" className="w-full"></Button>
       </Card.Footer>
     </Card>
   );
