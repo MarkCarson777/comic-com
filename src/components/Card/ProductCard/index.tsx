@@ -41,3 +41,27 @@ export function ProductCard({
     </Card>
   );
 }
+
+export function ProductCardSkeleton() {
+  return (
+    <Card className="flex animate-pulse flex-col overflow-hidden">
+      <div className="aspect-video w-full bg-gray-300" />
+      <Card.Header>
+        <Card.Title>
+          <div className="h-6 w-3/4 rounded-full bg-gray-300" />
+        </Card.Title>
+        <Card.Description>
+          <div className="h-4 w-1/2 rounded-full bg-gray-300" />
+        </Card.Description>
+      </Card.Header>
+      <Card.Content className="flex-grow">
+        <div className="h-4 w-full rounded-full bg-gray-300" />
+        <div className="h-4 w-full rounded-full bg-gray-300" />
+        <div className="h-4 w-3/4 rounded-full bg-gray-300" />
+      </Card.Content>
+      <Card.Footer>
+        <Button disabled size="lg" className="w-full" />
+      </Card.Footer>
+    </Card>
+  );
+}
