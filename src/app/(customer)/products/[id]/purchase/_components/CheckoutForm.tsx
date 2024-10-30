@@ -1,4 +1,12 @@
+"use client";
+
 import { loadStripe } from "@stripe/stripe-js";
+import {
+  Elements,
+  useElements,
+  useStripe,
+  PaymentElement,
+} from "@stripe/react-stripe-js";
 
 type CheckoutFormProps = {
   product: {};
@@ -10,5 +18,16 @@ const stripePromise = loadStripe(
 );
 
 export function CheckoutForm({ product, clientSecret }: CheckoutFormProps) {
-  return <h1>Form</h1>;
+  return (
+    <Elements options={{ clientSecret }} stripe={stripePromise}>
+      <Form />
+    </Elements>
+  );
+}
+
+function Form() {
+  const stripe = useStripe();
+  const elements = useElements();
+
+  return <PaymentElement />;
 }
