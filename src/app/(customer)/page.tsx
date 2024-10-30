@@ -2,11 +2,15 @@ import prisma from "@/db/db";
 import { Product } from "@prisma/client";
 import Link from "next/link";
 import Button from "@/components/Button";
-import { ProductCard } from "@/components/Card/ProductCard";
+import {
+  ProductCard,
+  ProductCardSkeleton,
+} from "@/components/Card/ProductCard";
 import { ArrowRight } from "lucide-react";
 import { Suspense } from "react";
 
 function getMostPopularProducts() {
+  // await wait();
   return prisma.product.findMany({
     where: { isAvailableForPurchase: true },
     orderBy: { orders: { _count: "desc" } },
@@ -15,12 +19,17 @@ function getMostPopularProducts() {
 }
 
 function getNewestProducts() {
+  // await wait();
   return prisma.product.findMany({
     where: { isAvailableForPurchase: true },
     orderBy: { createdAt: "desc" },
     take: 6,
   });
 }
+
+// function wait() {
+//   return new Promise((resolve) => setTimeout(resolve, 3000));
+// }
 
 export default function HomePage() {
   return (
@@ -39,7 +48,7 @@ type ProductGridSectionProps = {
   productsFetcher: () => Promise<Product[]>;
 };
 
-async function ProductGridSection({
+function ProductGridSection({
   productsFetcher,
   title,
 }: ProductGridSectionProps) {
@@ -55,7 +64,15 @@ async function ProductGridSection({
         </Button>
       </div>
       <div className="md:grid-cold-2 grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <Suspense>
+        <Suspense
+          fallback={
+            <>
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+            </>
+          }
+        >
           <ProductSuspense productsFetcher={productsFetcher} />
         </Suspense>
       </div>
