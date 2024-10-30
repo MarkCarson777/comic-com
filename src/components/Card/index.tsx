@@ -54,7 +54,7 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ),
 );
 
-CardContent.displayName = "CardFooter";
+CardFooter.displayName = "CardFooter";
 
 type CardComponent = typeof CardContainer & {
   Header: typeof CardHeader;
