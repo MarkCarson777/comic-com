@@ -4,7 +4,7 @@ import { cache as reactCache } from "react";
 // Define a type alias `Callback` for a function type that accepts any arguments
 // and returns a Promise of any type. This type ensures that the callback
 // passed to the cache function is asynchronous.
-type Callback = (...args: any[]) => Promise<any>;
+type Callback = (...args: unknown[]) => Promise<unknown>;
 
 // Export a function `cache` that takes three parameters:
 // `callback`: a function that matches the `Callback` type (an asynchronous function).
