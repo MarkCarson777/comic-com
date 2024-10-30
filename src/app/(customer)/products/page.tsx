@@ -6,16 +6,12 @@ import {
 import prisma from "@/db/db";
 import { cache } from "@/lib/cache";
 
-const getProducts = cache(
-  () => {
-    return prisma.product.findMany({
-      where: { isAvailableForPurchase: true },
-      orderBy: { name: "asc" },
-    });
-  },
-  ["/", "getProducts"],
-  { revalidate: 60 * 60 * 24 },
-);
+const getProducts = cache(() => {
+  return prisma.product.findMany({
+    where: { isAvailableForPurchase: true },
+    orderBy: { name: "asc" },
+  });
+}, ["/", "getProducts"]);
 
 export default function ProductsPage() {
   return (
