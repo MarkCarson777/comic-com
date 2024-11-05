@@ -12,7 +12,6 @@ import { cache } from "@/lib/cache";
 
 const getMostPopularProducts = cache(
   () => {
-    // await wait();
     return prisma.product.findMany({
       where: { isAvailableForPurchase: true },
       orderBy: { orders: { _count: "desc" } },
@@ -25,7 +24,6 @@ const getMostPopularProducts = cache(
 
 const getNewestProducts = cache(
   () => {
-    // await wait();
     return prisma.product.findMany({
       where: { isAvailableForPurchase: true },
       orderBy: { createdAt: "desc" },
@@ -35,10 +33,6 @@ const getNewestProducts = cache(
   ["/", "getNewestProducts"],
   { revalidate: 60 * 60 * 24 },
 );
-
-// function wait() {
-//   return new Promise((resolve) => setTimeout(resolve, 3000));
-// }
 
 export default function HomePage() {
   return (
