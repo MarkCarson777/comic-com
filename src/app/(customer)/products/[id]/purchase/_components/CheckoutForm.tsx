@@ -63,6 +63,7 @@ function Form({ priceInCents }: { priceInCents: number }) {
   const stripe = useStripe();
   const elements = useElements();
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -72,12 +73,21 @@ function Form({ priceInCents }: { priceInCents: number }) {
 
     // Check for existing order
 
-    stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/stripe/purchase-success`,
-      },
-    });
+    stripe
+      .confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/stripe/purchase-success`,
+        },
+      })
+      .then(({ error }) => {
+        if (error.type === "card_error" || error.type === "validation_error") {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage("An unknown error occurred");
+        }
+      })
+      .finally(() => setIsLoading(false));
   }
 
   return (
@@ -85,9 +95,11 @@ function Form({ priceInCents }: { priceInCents: number }) {
       <Card>
         <Card.Header>
           <Card.Title>Checkout</Card.Title>
-          <Card.Description className="text-destructive">
-            Error
-          </Card.Description>
+          {errorMessage && (
+            <Card.Description className="text-destructive">
+              {errorMessage}
+            </Card.Description>
+          )}
         </Card.Header>
         <Card.Content>
           <PaymentElement />
