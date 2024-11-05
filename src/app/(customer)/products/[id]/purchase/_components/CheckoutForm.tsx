@@ -9,6 +9,8 @@ import {
 } from "@stripe/react-stripe-js";
 import Image from "next/image";
 import { formatCurrency } from "@/lib/formatters";
+import Card from "@/components/Card";
+import Button from "@/components/Button";
 
 type CheckoutFormProps = {
   product: {
@@ -49,15 +51,38 @@ export function CheckoutForm({ product, clientSecret }: CheckoutFormProps) {
         </div>
       </div>
       <Elements options={{ clientSecret }} stripe={stripePromise}>
-        <Form />
+        <Form priceInCents={product.priceInCents} />
       </Elements>
     </div>
   );
 }
 
-function Form() {
+function Form({ priceInCents }: { priceInCents: number }) {
   const stripe = useStripe();
   const elements = useElements();
 
-  return <PaymentElement />;
+  return (
+    <form>
+      <Card>
+        <Card.Header>
+          <Card.Title>Checkout</Card.Title>
+          <Card.Description className="text-destructive">
+            Error
+          </Card.Description>
+        </Card.Header>
+        <Card.Content>
+          <PaymentElement />
+        </Card.Content>
+        <Card.Footer>
+          <Button
+            className="w-full"
+            size="lg"
+            disabled={stripe == null || elements == null}
+          >
+            Purchase - {formatCurrency(priceInCents / 100)}
+          </Button>
+        </Card.Footer>
+      </Card>
+    </form>
+  );
 }
